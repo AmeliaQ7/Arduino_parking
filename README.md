@@ -1,13 +1,8 @@
-# Arduino - System Parkingowy 🚗🅿️
+# Arduino - System Parkingowy 
 
 ## Opis projektu
 
-Projekt przedstawia prosty **system automatycznego parkingu** wykonany na platformie **Arduino**, wykorzystujący:
-
-* serwomechanizm jako szlaban,
-* 2 czujniki (wjazd / wyjazd),
-* wyświetlacz LCD,
-* logikę liczenia wolnych miejsc parkingowych.
+Projekt przedstawia prosty **system automatycznego parkingu** wykonany na platformie **Arduino**.
 
 System automatycznie:
 
@@ -22,7 +17,7 @@ System automatycznie:
 
 ## Funkcjonalności
 
-### 🚗 Wjazd
+###  Wjazd
 
 Jeśli czujnik przy wjeździe wykryje samochód:
 
@@ -41,7 +36,7 @@ Czekaj...
 
 ---
 
-### 🚗 Wyjazd
+###  Wyjazd
 
 Jeśli czujnik przy wyjeździe wykryje samochód:
 
@@ -50,7 +45,7 @@ Jeśli czujnik przy wyjeździe wykryje samochód:
 
 ---
 
-### 📺 Wyświetlacz LCD
+###  Wyświetlacz LCD
 
 LCD pokazuje:
 
@@ -69,13 +64,7 @@ lub inne statusy:
 ---
 
 ## Wykorzystane komponenty
-
-* Arduino UNO / Nano
-* Serwomechanizm
-* LCD
-* Potencjometr
-* 2x czujnik ultradźwiękowy
-* Płytka stykowa + przewody połączeniowe
+<img width="674" height="366" alt="image" src="https://github.com/user-attachments/assets/54b7bb35-e577-492c-8935-2366bf983368" />
 
 ---
 
@@ -179,5 +168,12 @@ START PARKING
 - Klaudia Magrian
 - Aleksandra Górska
 - Aleksandra Strzelczyk
+
+## Schemat
+<img width="563" height="716" alt="image" src="https://github.com/user-attachments/assets/5e417a21-20a8-4cb5-9e37-d046d524a0a9" />
+## Zdjęcia
+<img width="480" height="640" alt="image" src="https://github.com/user-attachments/assets/904835e2-24f0-4182-a3d9-9ff11aff2206" />
+
+
 
 
