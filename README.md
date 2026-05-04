@@ -1,12 +1,12 @@
-# Arduino Parking System 🚗🅿️
+# Arduino - System Parkingowy 🚗🅿️
 
 ## Opis projektu
 
 Projekt przedstawia prosty **system automatycznego parkingu** wykonany na platformie **Arduino**, wykorzystujący:
 
 * serwomechanizm jako szlaban,
-* 2 czujniki ultradźwiękowe HC-SR04 (wjazd / wyjazd),
-* wyświetlacz LCD 16x2,
+* 2 czujniki (wjazd / wyjazd),
+* wyświetlacz LCD,
 * logikę liczenia wolnych miejsc parkingowych.
 
 System automatycznie:
@@ -71,11 +71,10 @@ lub inne statusy:
 ## Wykorzystane komponenty
 
 * Arduino UNO / Nano
-* Serwomechanizm SG90
-* LCD 16x2
-* Potencjometr 10k (do kontrastu LCD)
-* 2x czujnik ultradźwiękowy HC-SR04
-* Rezystory
+* Serwomechanizm
+* LCD
+* Potencjometr
+* 2x czujnik ultradźwiękowy
 * Płytka stykowa + przewody połączeniowe
 
 ---
@@ -95,7 +94,7 @@ lub inne statusy:
 
 ---
 
-### Czujniki ultradźwiękowe
+### Czujniki
 
 #### Wjazd
 
@@ -129,7 +128,7 @@ lub inne statusy:
 int max_miejsc = 3;
 ```
 
-Możesz łatwo zmienić pojemność parkingu, edytując tę wartość.
+Można zmienić pojemność parkingu, edytując tę wartość.
 
 ---
 
@@ -171,21 +170,6 @@ Po starcie na LCD pojawi się:
 ```text
 START PARKING
 ```
-
----
-
-## Możliwe rozszerzenia projektu
-
-### 🔥 Pomysły na rozwój
-
-* diody LED (zielona / czerwona)
-* buzzer
-* RFID / karta dostępu
-* moduł WiFi ESP8266
-* aplikacja mobilna
-* zapis danych do bazy
-* system rezerwacji miejsc
-* monitoring zajętości online
 
 ---
 
