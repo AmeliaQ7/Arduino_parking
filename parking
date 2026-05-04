@@ -1,0 +1,125 @@
+#include <Servo.h>
+#include <LiquidCrystal.h>
+
+LiquidCrystal lcd(2, 3, 4, 5, 6, 7);
+
+Servo szlaban;
+
+// czujniki
+const int trigWejscie = 8;
+const int echoWejscie = 9;
+const int trigWyjscie = 10;
+const int echoWyjscie = 11;
+
+// parking
+int max_miejsc = 3;
+int wolne_miejsca = 3;
+
+// blokady
+bool autoWjazd = false;
+bool autoWyjazd = false;
+
+// komunikat LCD
+String status = "START";
+
+// pomiar odległości
+long zmierzOdleglosc(int trig, int echo) {
+  digitalWrite(trig, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trig, LOW);
+
+  long czas = pulseIn(echo, HIGH, 30000);
+  long odleglosc = czas * 0.034 / 2;
+
+  if (odleglosc == 0) odleglosc = 999;
+
+  return odleglosc;
+}
+
+void otworzSzlaban() {
+  szlaban.write(90);
+  delay(2000);
+  szlaban.write(0);
+}
+
+void pokazLCD() {
+  lcd.clear();
+
+  lcd.setCursor(0, 0);
+  lcd.print("Miejsca: ");
+  lcd.print(wolne_miejsca);
+  lcd.print("/");
+  lcd.print(max_miejsc);
+
+  lcd.setCursor(0, 1);
+  lcd.print(status);
+}
+
+void setup() {
+  pinMode(trigWejscie, OUTPUT);
+  pinMode(echoWejscie, INPUT);
+  pinMode(trigWyjscie, OUTPUT);
+  pinMode(echoWyjscie, INPUT);
+
+  szlaban.attach(12);
+  szlaban.write(0);
+
+  lcd.begin(16, 2);
+  lcd.print("START PARKING");
+
+  delay(1500);
+  lcd.clear();
+}
+
+void loop() {
+
+  long wejscie = zmierzOdleglosc(trigWejscie, echoWejscie);
+  long wyjscie = zmierzOdleglosc(trigWyjscie, echoWyjscie);
+
+  status = "OK";
+
+  // RESET BLOKAD
+  if (wejscie > 15) autoWjazd = false;
+  if (wyjscie > 15) autoWyjazd = false;
+
+  // 🚗 WJAZD
+  if (wejscie < 10 && !autoWjazd) {
+    autoWjazd = true;
+
+    if (wolne_miejsca > 0) {
+      status = "WJAZD";
+      otworzSzlaban();
+      wolne_miejsca--;
+  } else {
+    status = "BRAK MIEJSC";
+
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("BRAK MIEJSC");
+
+    lcd.setCursor(0, 1);
+    lcd.print("Czekaj...");
+
+    delay(3000); // ⬅️ TU ustawiasz jak długo ma być napis
+  }
+  }
+
+  // 🚗 WYJAZD
+  if (wyjscie < 10 && !autoWyjazd) {
+    autoWyjazd = true;
+
+    status = "WYJAZD";
+
+    if (wolne_miejsca < max_miejsc) {
+      otworzSzlaban();
+      wolne_miejsca++;
+    }
+  }
+
+  // LCD UPDATE
+  pokazLCD();
+
+  delay(200);
+}
